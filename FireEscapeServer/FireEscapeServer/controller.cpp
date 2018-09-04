@@ -4,7 +4,7 @@
 #include "controller.h"
 #include "sensor.h"
 
-unsigned int Controller::_id = 0;
+unsigned int Controller::_id = 1;
 
 Controller::Controller(std::string str = "Unknown Controller")
 {

@@ -3,7 +3,7 @@
 
 #include "sensor.h"
 
-unsigned int Sensor::_id = 0;
+unsigned int Sensor::_id = 1;
 
 Sensor::Sensor(std::string str = "Unknown Sensor")
 {
