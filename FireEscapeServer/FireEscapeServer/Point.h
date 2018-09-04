@@ -7,6 +7,7 @@ private:
 public:
 	const int id;
 	const std::string name;
+	/**************************************************/
 	Point(std::string _name = "Unspecified");
 };
 
