@@ -2,11 +2,15 @@
 
 int Edge::_id = 0;
 
-Edge::Edge(std::string _name, int _len): id(_id++), name(_name), length(_len) {
+Edge::Edge(std::string _name, unsigned int _length): id(_id++), name(_name), length(_length) {
 	weight = length;
 }
 
-int Edge::getWeight()
+void Edge::updateWeight(int _temp, unsigned int _gas)
 {
-	return weight;
+	temperature = _temp;
+	gas = _gas;
+	weight = length + temperature + gas;
 }
+
+
