@@ -97,11 +97,17 @@ public:
 			.weight_map(weight));
 
 		std::cout << "distances and parents:" << std::endl;
-
+		/*
 		vertex_iterator vi, vend;
 		for (boost::tie(vi, vend) = vertices(g); vi != vend; ++vi) {
+			std::cout << g[predecessors[vi]] << '\n';
 			std::cout << "distance(" << ") = " << distances[*vi] << ", ";
 			std::cout << "parent(" << ") = " << predecessors[*vi] << std::endl;
+		}*/
+		for (auto v : boost::make_iterator_range(boost::vertices(g))) {
+			std::cout << g[v].name << " : ";
+			std::cout << "distance = " << distances[v] << ", ";
+			std::cout << "parent = " << g[predecessors[v]].name << "\n";
 		}
 		std::cout << std::endl;
 	}
