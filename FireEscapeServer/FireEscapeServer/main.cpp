@@ -1,4 +1,8 @@
 #include "BuildingGraph.h"
+#include "SerialPort2.h"
+#include "SerialPort.h"
+
+
 
 void init1F(BuildingGraph& g) {
 	auto exit_l1 = g.addExit(Point("Exit L1"));
@@ -43,10 +47,17 @@ void init1F(BuildingGraph& g) {
 
 int main(int argc, char *argv[])
 {
-	BuildingGraph building;
-	init1F(building);
-	building.update();
-	building.evaluate();
+	//BuildingGraph building;
+	//init1F(building);
+	//building.update();
+	//building.evaluate();
+
+	//testSerial();
+
+	SerialPort serial("COM7", 9600);
+	serial.start();
+	Sleep(3 * 1000);
+	serial.stop();
 
 	return 0;
 }
