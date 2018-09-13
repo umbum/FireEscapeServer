@@ -5,20 +5,22 @@
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
 
-class SerialPort
-{
+#include "uutil.h"
+
+class SerialPort {
 public:
 	enum {
 		BUF_SIZE = 256
 	};
+	const std::string name;
 protected:
 	boost::asio::io_context io_context;
 	boost::asio::serial_port port{ io_context };
 	boost::mutex mutex;
+	boost::thread loop_thread;
 
-	char read_buf[BUF_SIZE];
-	char eol;
-
+	std::string read_buf;
+	char eol = 0x0d;
 public:
 	SerialPort(const std::string port_name, unsigned int baud_rate);
 	virtual ~SerialPort();
