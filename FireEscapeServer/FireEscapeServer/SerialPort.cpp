@@ -82,3 +82,84 @@ int SerialPort::write(const char *data, const int &size) {
 	return port.write_some(boost::asio::buffer(data, size));
 }
 
+
+
+//////////////////////////////////////////////////////////////////////////
+///////////////////      static methods     //////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+/*
+std::vector<std::string> SerialPort::get_port_names() {
+	std::vector<std::string> names;
+
+	BOOL rv;
+	DWORD size;
+	GUID guid[1];
+	HDEVINFO hdevinfo;
+	DWORD idx = 0;
+	SP_DEVINFO_DATA devinfo_data;
+	devinfo_data.cbSize = sizeof(SP_DEVINFO_DATA);
+	int count = 0;
+
+	rv = SetupDiClassGuidsFromName("Ports", (LPGUID)&guid, 1, &size);
+	if (!rv) {
+		std::cout << "error : SetupDiClassGuidsFromName() failed..." << std::endl;
+		return names;
+	}
+
+	hdevinfo = SetupDiGetClassDevs(&guid[0], NULL, NULL, DIGCF_PRESENT | DIGCF_PROFILE);
+	if (hdevinfo == INVALID_HANDLE_VALUE) {
+		std::cout << "error : SetupDiGetClassDevs() failed..." << std::endl;
+		return names;
+	}
+
+	while (SetupDiEnumDeviceInfo(hdevinfo, idx++, &devinfo_data)) {
+		char friendly_name[MAX_PATH];
+		char port_name[MAX_PATH];
+		DWORD prop_type;
+		DWORD type = REG_SZ;
+		HKEY hKey = NULL;
+
+		rv = ::SetupDiGetDeviceRegistryProperty(hdevinfo, &devinfo_data, SPDRP_FRIENDLYNAME, &prop_type,
+			(LPBYTE)friendly_name, sizeof(friendly_name), &size);
+		if (!rv) {
+			std::cout << "error : SetupDiGetDeviceRegistryProperty() failed..." << std::endl;
+			continue;
+		}
+
+		hKey = ::SetupDiOpenDevRegKey(hdevinfo, &devinfo_data, DICS_FLAG_GLOBAL, 0, DIREG_DEV, KEY_READ);
+		if (!hKey) continue;
+
+		size = sizeof(port_name);
+		rv = ::RegQueryValueEx(hKey, "PortName", 0, &type, (LPBYTE)&port_name, &size);
+		::RegCloseKey(hKey);
+
+		names.push_back(port_name);
+	}
+
+	SetupDiDestroyDeviceInfoList(hdevinfo);
+
+	return names;
+}
+
+int SerialPort::get_port_number() {
+	std::vector<std::string> names = get_port_names();
+	return names.size();
+}
+
+std::string SerialPort::get_port_name(const unsigned int &idx) {
+	std::vector<std::string> names = get_port_names();
+	if (idx >= names.size()) return std::string();
+	return names[idx];
+}
+
+void SerialPort::print_devices() {
+	std::cout << "SerialPort::print_devices()" << std::endl;
+	int n = SerialPort2::get_port_number();
+	for (int i = 0; i < n; ++i) {
+		std::string name = SerialPort2::get_port_name(i);
+		std::cout << "\t" << name.c_str() << std::endl;
+	}
+}
+
+*/
