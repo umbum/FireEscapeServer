@@ -1,7 +1,7 @@
 #include "BuildingGraph.h"
 #include "SerialPort2.h"
 #include "SerialPort.h"
-
+#include "uutil.h"
 
 
 void init1F(BuildingGraph& g) {
@@ -54,10 +54,15 @@ int main(int argc, char *argv[])
 
 	//testSerial();
 
-	SerialPort serial("COM7", 9600);
-	serial.start();
-	Sleep(3 * 1000);
-	serial.stop();
+	try {
+		SerialPort serial("COM7", 9600);
+		serial.start();
+		Sleep(3 * 1000);
+		serial.stop();
+	} catch (std::string e) {
+		std::cerr << e << std::endl;
+		exit(0);
+	}
 
 	return 0;
 }
